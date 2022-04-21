@@ -2,12 +2,16 @@
 
 include "../connection.php";
 
-$username = $_POST['username'];
-$kundnamn = $_POST['kundnamn'];
-$password = $_POST['password'];
-$grupp = $_POST['grupp'];
+session_start();
 
-if(!empty($username) && !empty($kundnamn) && !empty($password) && !empty($grupp))
+print_r($_POST);
+
+$username = "";
+$kundnamn = "";
+$password = "";
+$grupp = "";
+
+if(!empty($_POST['username']) && !empty($_POST['kundnamn']) && !empty($_POST['password']) && !empty($_POST['grupp']))
 {
     $sql = "INSERT INTO `users` (`uid`, `namn`, `password`, `grupp`) VALUES ('$username', '$kundnamn', '$password', '$grupp')";
     $result = mysqli_query($conn, $sql);
@@ -59,6 +63,11 @@ if(!empty($username) && !empty($kundnamn) && !empty($password) && !empty($grupp)
 <div class="container6">
 <?php
 
+$newusername = $_POST['newusername'];
+$newnamn = $_POST['newnamn'];
+$newpassword = $_POST['newpassword'];
+$newgrupp = $_POST['newgrupp'];
+
 $sql2 = "SELECT * FROM `users`";
 $result2 = mysqli_query($conn, $sql2);
 while($row2 = mysqli_fetch_assoc($result2))
@@ -71,23 +80,27 @@ while($row2 = mysqli_fetch_assoc($result2))
                 <h2>Update Users</h2>
                 <p>
                 <label>Username: </label>
-                <input type="text" name="username" value="<?php echo $row2['uid']?>">
+                <input type="text" name="newusername" value="<?php echo $row2['uid'];?>">
                 <label>Name: </label>
-                <input type="text" name="kundnamn"  value="<?php echo $row2['namn']?>">
+                <input type="text" name="newnamn"  value="<?php echo $row2['namn'];?>">
                 <label>Password: </label>
-                <input type="text" name="password" value="<?php echo $row2['password']?>"></p>
+                <input type="text" name="newpassword" value="<?php echo $row2['password'];?>"></p>
                 <p><label>Grupp:</label>
-                <select name="grupp">
+                <select name="newgrupp">
                     <option value="Ekonom">Ekonom</option>
                     <option value="Admin">Admin</option>
                     <option value="Kundmottagare">Kundmottagare</option>
                 </select></p>
             </div>
             </div>
-        <input type="submit" value="Create" class="button2">
+        <input type="submit" value="Update" class="button2">
     </form>
+    if
     <?php
     }
+echo $row2['uid'];
+//$sql3 = "UPDATE `users` SET `uid`= '$newusername' ,`namn`= '$newnamn', `password`= '$newpassword',`grupp`= '$newgrupp' WHERE `uid` = '$row2['uid']'";
+
     ?>
 </div>
 </body>

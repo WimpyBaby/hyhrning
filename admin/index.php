@@ -1,33 +1,37 @@
 <?php
-
-session_start();
-include "../connection.php";
+    $staffLogin = false;
+    $showError = false;
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        include "../connection.php";
+        $uid = $_POST['uid'];
+        $password = $_POST['password'];
+        $sql = "SELECT * FROM users WHERE uid='$uid'";
+        $result = mysqli_query($conn, $sql);
+        if($result){
+            $row = mysqli_fetch_assoc($result);
+            $staffLogin = true;
+            session_start();
+            $_SESSION['staffLogin'] = true;
+            $_SESSION['uid'] = $uid;
+            header("location: home.php");
+        }
+    }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style.css?v=<?php echo time();?>">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
-    <title>Document</title>
+    <title>login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="adminlog">
-        <h1>Database Users</h1>
-        <p><a href="users.php">Manage Users</a></p>
-        <p><h1>Database Rentals</h1></p>
-        <p><a href="kund.php">Customers</a></p>
-        <p><a href="bilar.php">Cars</a></p>
-        <p><a href="prisgrupp.php">Price Group</a></p>
-        <p><a href="uthyrningar.php">Rentals</a></p>
-        <p><a href="loggaut.php">Log Out</a></p>
-    </div>
+    <form method="post" action="index.php">
+        <h1 class="heading">Admin sign <span>In</span></h1>
+        <input name="uid" type="text" placeholder="uid" class="box">
+        <input name="password" type="password" placeholder="password" class="box">
+        <input type="submit" class="btn" value="Sign In">
+    </form>
 </body>
-</html>
