@@ -597,12 +597,19 @@ span{
 }
 
 .adminlog a{
-    background: #53CEC2;
     text-decoration: none;
-    color: white;
+    color: black;
     font-size: 24px;
     padding: 10px;
     border-radius: 1rem;
+    border: 1px solid #53CEC2;
+    display: block;
+    transition: .5s
+}
+
+.adminlog a:hover{
+    background-color: #53CEC2;
+    color: white;
 }
 
 .adminlog p{
@@ -641,7 +648,12 @@ form.test {
     box-shadow: rgba(100, 100, 100, 0.2) 0px 7px 29px 0px;  
 }
 
+
 form.test .button2{
 width: 50%;
 margin: 1rem;
+}
+
+.container7 section{
+    display: grid;
 }

@@ -97,8 +97,16 @@ span{
 }
 
 form p{
+    display: grid;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .admin{
     display: block;
+}
+
+.newUser{
+    widht: 80%;
 }

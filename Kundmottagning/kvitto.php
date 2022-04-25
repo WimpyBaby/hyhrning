@@ -42,27 +42,6 @@ $gruppSql = "SELECT *, Forsakring, Korttiddygn, Korttidkm, Veckoslut, Veckoslutk
 $gruppRes = mysqli_query($conn, $gruppSql);
 $gruppRow = mysqli_fetch_assoc($gruppRes);
 
-// echo $gruppRow['korttidkm'];
-
-// switch ($hyrtyp){
-//     case 'korttid':
-//         $kmCost = intval($gruppRow['korttidkm']*$_POST['matar']);
-//         // $rentType = 'Korttiddygn';
-//         $kCost = intval($gruppRow['Korttiddygn']*$dagar);
-//         break;
-//     case 'veckoslut':
-//         $kmCost = intval($gruppRow['Veckoslutkm']*$_POST['matar']);
-//         $rentType = 'Veckoslut';
-//         break;
-//     case 'veckoslutfri';
-//         $kmrCost = (intval($gruppRow['Veckoslutfri']));
-//         $rentType = 'Veckoslutfri';
-//     break;  
-// }
-
-
-// echo $dagar;
-
 ?>
 
 <!DOCTYPE html>

@@ -47,10 +47,12 @@ switch ($hyrtyp){
     case 'veckoslut':
         $kmCost = intval($gruppRow['Veckoslutkm']*$distance);
         $rentType = 'Veckoslut';
+        $kCost = intval($gruppRow['Veckoslut']*$dagar);
         break;
     case 'veckoslutfri';
-        $kmrCost = (intval($gruppRow['Veckoslutfri']));
+        $kmCost = (intval($gruppRow['Veckoslutfri']));
         $rentType = 'Veckoslutfri';
+        $kCost = intval($gruppRow['Veckoslutfri']*$dagar);
     break;  
 }
 
