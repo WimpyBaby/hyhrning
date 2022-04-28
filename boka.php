@@ -104,7 +104,7 @@ $carRow = mysqli_fetch_assoc($carRes);
                 <option value="veckoslut">weekend</option>
                 <option value="veckoslutfri">weekend free</option>
             </select>
-            <br><input type="submit" value="Rent"/></br>
+            <br><input type="submit" value="Rent" class="button2"/></br>
             <input type="hidden" name="insurance" value="<?php echo intval($carRow['Forsakring'])*$total;?>"/>
     </form>
     </section>

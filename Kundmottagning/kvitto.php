@@ -20,6 +20,7 @@ $bok = $_POST['bok'];
 
 // $hyrtyp = $_POST['hyrtyp'];
 $dagar = ((strtotime($indatum)-strtotime($utdatum))/86400)+1;
+$total = $kmCost + $kcost + $forsakring*$dagar;
 
 // print_r($_POST);
 $reg = $_POST['reg'];
@@ -38,9 +39,9 @@ $row3 = mysqli_fetch_assoc($result3);
 
 // $row3['korttidkm'];
 
-$gruppSql = "SELECT *, Forsakring, Korttiddygn, Korttidkm, Veckoslut, Veckoslutkm, Veckoslutfri FROM bil INNER JOIN gruppbet ON bil.Gruppbet = gruppbet.Gruppbet WHERE bil.Regnr = '$reg'";
-$gruppRes = mysqli_query($conn, $gruppSql);
-$gruppRow = mysqli_fetch_assoc($gruppRes);
+// $gruppSql = "SELECT *, Forsakring, Korttiddygn, Korttidkm, Veckoslut, Veckoslutkm, Veckoslutfri FROM bil INNER JOIN gruppbet ON bil.Gruppbet = gruppbet.Gruppbet WHERE bil.Regnr = '$reg'";
+// $gruppRes = mysqli_query($conn, $gruppSql);
+// $gruppRow = mysqli_fetch_assoc($gruppRes);
 
 ?>
 
@@ -59,7 +60,7 @@ $gruppRow = mysqli_fetch_assoc($gruppRes);
 </head>
 <body>
     <div class="container5">
-    <form>
+    <form method = post>
     <img src="../bilder/logo2.png">
             <h1>Hi, <span><?php echo $row['KundNamn'];?></span></h1>
             <h2>Thank you for ordering with Wimpy Rentals</h2>
@@ -78,7 +79,7 @@ $gruppRow = mysqli_fetch_assoc($gruppRes);
                 <p>Km Cost: <?php echo $kmCost;?> kr</p>
                 <p>Rent Cost: <?php echo $kcost;?> kr</p>
                 <p>Fuel Cost: <?php echo $fuel?></p>
-                <p>Total Cost: <?php echo $kmCost + $kcost + $forsakring*$dagar;?></p>
+                <p>Total Cost: <?php echo $total;?></p>
             </div>
             <div class="info2">
                 <h2>Rent Information</h2>
@@ -91,6 +92,6 @@ $gruppRow = mysqli_fetch_assoc($gruppRes);
             </div>
         </div>
     </div>
-</form>
+    </form>
 </body>
 </html>

@@ -2,11 +2,15 @@
     session_start();
     include "../connection.php";
     if(isset($_POST['update'])){
-        $oldUid = $_POST['oldUid'];
         $kundname = $_POST['kundnamn'];
-        $name = $_POST['name'];
-        $password = $_POST['password'];
-        $updateSql = "UPDATE `kund` SET `KundNamn`='$kundname',`namn`='$name',`password`='$pass',`grupp`='$group' WHERE `uid`='$oldUid'";
+        $adress = $_POST['adress'];
+        $postadress = $_POST['postadress'];
+        $tel = $_POST['tel'];
+        $mobil = $_POST['mobil'];
+        $epost = $_POST['epost'];
+        $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        // $password = $_POST['password'];
+        $updateSql = "UPDATE `kund` SET `KundNamn`='$kundname',`Adress`='$adress',`Postadress`='$postadress',`Tel`='$tel', `MobilTel`='$mobil', `Epost`='$epost', `Password` = '$hash' WHERE `KundId`=".$_POST['id'];
         $updateRes = mysqli_query($conn, $updateSql);
     }
 ?>
@@ -25,6 +29,7 @@
 <body>
     <a href="home.php">Return</a>
     <a href="index.php">Logout</a>
+    <h1>Customers</h1>
     <div class="mottFLEX">
             <?php 
             $admSql = "SELECT * FROM kund";
@@ -34,19 +39,22 @@
             ?>
             <div class="motUI">
             <form class="user" method="post" action="">
-                <input type="hidden" name="oldUid" value="<?php echo $row['KundId']?>">
-                <br>Name: <?php echo $row['KundId']?></br>
-                <p>Uid: <input type="text" name="kundnamn" value="<?php echo $row['KundNamn']?>"></p>
+                <input type="hidden" name="id" value="<?php echo $row['KundId']?>">
+                <br>Customer Id: <?php echo $row['KundId'];?></br>
+                <p>Customer Name: <input type="text" name="kundnamn" value="<?php echo $row['KundNamn']?>"></p>
                 <p>Password: <input type="password" name="password" value=""></p>
                 <p>Adress: <input type="text" name="adress" value="<?php echo $row['Adress'];?>"></p>
-                <p>Adress: <input type="text" name="adress" value="<?php echo $row['Adress'];?>"></p>
+                <p>Postadress: <input type="text" name="postadress" value="<?php echo $row['Postadress'];?>"></p>
+                <p>Tel: <input type="text" name="tel" value="<?php echo $row['Tel'];?>"></p>
+                <p>Mobile : <input type="text" name="mobil" value="<?php echo $row['MobilTel'];?>"></p>
+                <p>Epost: <input type="text" name="epost" value="<?php echo $row['Epost'];?>"></p>
                 <input type="submit" value="Update" class="button2" name="update">
             </form>
+            </div>
             <?php
                 }
             }
             ?>
-            </div>
         </div>
     </section>
 </body>

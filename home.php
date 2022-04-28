@@ -66,7 +66,7 @@ include "connection.php";
                 aria-label="Search through site content"
                 min="2021-10-05" max="2025-12-31" name="dateto">
             </div>
-            <input type="submit" name="go" value="Search" >
+            <input type="submit" name="go" value="Search" class="button3">
         </div>
         </form>
     </div>

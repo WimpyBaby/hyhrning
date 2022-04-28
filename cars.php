@@ -4,14 +4,20 @@ include("connection.php");
 // if ($_SESSION['isLoggedin'] = false){
 //     header("location: start.php");
 // }
+session_start();
+$error = false;
 
-
-if($_SERVER["REQUEST_METHOD"] = "POST"){
+if($_SERVER["REQUEST_METHOD"] == "POST"){
     $fromdate = $_POST["datefrom"];
     $todate = $_POST["dateto"];
-    $lediga = array();
-    $sql = "SELECT *, Forsakring, Korttiddygn, korttidkm, Veckoslut, Veckoslutkm, Veckoslutfri FROM `bil` INNER JOIN `gruppbet` ON bil.Gruppbet = gruppbet.Gruppbet WHERE `Regnr` not in ( SELECT `Regnr` FROM `hyr` WHERE `Indatum` and `Utdatum` BETWEEN '$fromdate' and '$todate' UNION SELECT `Regnr` FROM `hyr` WHERE `Utdatum` < '$fromdate' and  `Indatum` > '$todate')";
-    $result = mysqli_query($conn, $sql);
+    $check = strtotime($fromdate) <= strtotime($todate);
+    $today = strtotime(date("Y/m/d"));
+    if($today <= strtotime($fromdate) && $check==true){
+        $error = false;
+    }
+    else{
+        $error = true;
+    }
 }
 ?>
 
@@ -30,49 +36,64 @@ if($_SERVER["REQUEST_METHOD"] = "POST"){
     <title>Hyrning</title>
 </head>
 <body>
-    <div class="table">
-    <h1>Available Cars</h1>
-    <table>
-        <thead>
-            <tr>
-            <th>Registration Number</th>
-            <th>Brand</th>
-            <th>Modell</th>
-            <th>Årsmodell</th>
-            <th>Mätarinställning</th>
-            <th>Antal Dygn</th>
-            <th>Försäkring</th>
-            <th>Korttiddygn</th>
-            <th>korttidkm</th>
-            <th>Veckoslut</th>
-            <th>Veckoslutkm</th>
-            <th>Veckoslutfri</th>
-            <th>Boka</th>
-            </tr>
-    </thead>
-    <?php
-     while($row = mysqli_fetch_assoc($result))
-     {
-         echo "<tr>
-             <td>". $row['Regnr']. "</td>
-             <td>". $row['Marke']. "</td>
-             <td>". $row['Modell']. "</td>
-             <td>". $row['Arsmodell']. "</td>
-             <td>". $row['Matarstallning']. "</td>
-             <td>". $row['Antaldygn']. "</td>
-             <td>". $row['Forsakring']. "</td>
-             <td>". $row['Korttiddygn']. "</td>
-             <td>". $row['korttidkm']. "</td>
-             <td>". $row['Veckoslut']. "</td>
-             <td>". $row['Veckoslutkm']. "</td>
-             <td>". $row['Veckoslutfri']. "</td>
-             <td><a href='boka.php?regnr=".$row['Regnr']. "&in=".$fromdate."&out=".$todate."'>Rent</a></td>
-             </tr>
-             ";
-         echo "<br>";
-     }
-    ?>
-</table>
+<?php
+            if($error){
+
+                echo '
+                <h1>Invalid Date</h1>';
+
+            
+            }else{
+            $sql = "SELECT *, Forsakring, Korttiddygn, korttidkm, Veckoslut, Veckoslutkm, Veckoslutfri FROM `bil` INNER JOIN `gruppbet` ON bil.Gruppbet = gruppbet.Gruppbet WHERE `Regnr` not in ( SELECT `Regnr` FROM `hyr` WHERE `Indatum` and `Utdatum` BETWEEN '$fromdate' and '$todate' UNION SELECT `Regnr` FROM `hyr` WHERE `Utdatum` < '$fromdate' and  `Indatum` > '$todate')";
+            $result = mysqli_query($conn, $sql);
+echo '
+<div class="table">
+<h1>Available Cars</h1>
+    <table class="car-data" style="margin-top: 5rem;">
+    <thead>
+    <tr>
+    <th>Registration Number</th>
+    <th>Brand</th>
+    <th>Modell</th>
+    <th>Årsmodell</th>
+    <th>Mätarinställning</th>
+    <th>Antal Dygn</th>
+    <th>Försäkring</th>
+    <th>Korttiddygn</th>
+    <th>korttidkm</th>
+    <th>Veckoslut</th>
+    <th>Veckoslutkm</th>
+    <th>Veckoslutfri</th>
+    <th>Boka</th>
+    </tr>
+</thead>
+<tbody>
+';
+while($row = mysqli_fetch_assoc($result))
+{
+                    echo "<tr>
+                    <td>". $row['Regnr']. "</td>
+                    <td>". $row['Marke']. "</td>
+                    <td>". $row['Modell']. "</td>
+                    <td>". $row['Arsmodell']. "</td>
+                    <td>". $row['Matarstallning']. "</td>
+                    <td>". $row['Antaldygn']. "</td>
+                    <td>". $row['Forsakring']. "</td>
+                    <td>". $row['Korttiddygn']. "</td>
+                    <td>". $row['korttidkm']. "</td>
+                    <td>". $row['Veckoslut']. "</td>
+                    <td>". $row['Veckoslutkm']. "</td>
+                    <td>". $row['Veckoslutfri']. "</td>
+                    <td><a href='boka.php?regnr=".$row['Regnr']. "&in=".$fromdate."&out=".$todate."'>Rent</a></td>
+                    </tr>
+                    ";
+                }
+            }
+            echo '
+            </tbody>
+    </table>
     </div>
+            ';
+            ?>
 </body>
 </html>

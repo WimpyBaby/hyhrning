@@ -9,8 +9,6 @@ $fuel = $_POST['fuel'];
 $hyrtyp = $_POST['hyrtyp'];
 $dagar = ((strtotime($indatum)-strtotime($utdatum))/86400)+1;
 
-var_dump($_POST);
-
 $reg = $_GET['regnr'];
 
 $sql = "SELECT * FROM kund WHERE ".$_SESSION['KundId']." = KundId";
@@ -25,7 +23,8 @@ $sql3 = "SELECT * FROM gruppbet WHERE '".$row2['Gruppbet']."' = Gruppbet";
 $result3 = mysqli_query($conn, $sql3);
 $row3 = mysqli_fetch_assoc($result3);
 
-$sql4 = "SELECT * FROM hyr WHERE '$reg' = Regnr";
+
+$sql4 = "SELECT * FROM hyr WHERE `KundId` =".$_SESSION['KundId'];
 $result4 = mysqli_query($conn, $sql4);
 $row4 = mysqli_fetch_assoc($result4);
 
@@ -43,6 +42,7 @@ switch ($hyrtyp){
         $kmCost = intval($gruppRow['korttidkm']*$distance);
         // $rentType = 'Korttiddygn';
         $kCost = intval($gruppRow['Korttiddygn']*$dagar);
+
         break;
     case 'veckoslut':
         $kmCost = intval($gruppRow['Veckoslutkm']*$distance);
@@ -55,6 +55,12 @@ switch ($hyrtyp){
         $kCost = intval($gruppRow['Veckoslutfri']*$dagar);
     break;  
 }
+
+$bok = $row4['Bokningsdatum'];
+$total = $kmCost + $kCost + $row3['Forsakring']*$dagar;
+
+$hyrSql = "UPDATE hyr SET `AntalKm`='$distance', `Kostnad`='$total', `Bensinkostnad`='$fuel' WHERE `KundId`= '".$_SESSION['KundId']."' AND `Regnr`='$reg' AND `Bokningsdatum`='$bok'";
+$hyrresult = mysqli_query($conn, $hyrSql);
 
 
 // echo $dagar;

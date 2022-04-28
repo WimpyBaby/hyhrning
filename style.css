@@ -492,6 +492,7 @@ input{
     grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
     gap: 1.5rem;
 }
+
 .motUI{
     box-shadow: 0 .1rem .5rem rgba(0, 0, 0, 0.1);
     padding: 2rem;
@@ -657,4 +658,34 @@ margin: 1rem;
 
 .container7 section{
     display: grid;
+}
+
+.motUI2{
+    box-shadow: 0 .1rem .5rem rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin: 2rem;
+    border-radius: 1rem;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.motUI2 p{
+    margin: 10px;
+}
+
+.button3{
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color:rgba(83, 206, 194, .7);
+    font-size: 1rem;
+    text-align: center;
+    border-radius: 1rem;
+    margin-right: -2rem;
+    color: #fff;
+    margin-right: 1rem;
+    margin-top: -2px;
+}
+
+.allusers h2{
+    text-align: center;
 }

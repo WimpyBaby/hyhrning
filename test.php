@@ -34,7 +34,7 @@ while($row = mysqli_fetch_assoc($result)){
 <body>
 <form>
   <div class="id">
-      <p>Your Id is: <span><?php echo $row['KundId'];?></span></p>
+      <p>Your Id is: <h2><span><?php echo $row['KundId'];?></span></h2></p>
       <a href="login.php"></a>
       <br><a href="login.php">Return to login</a></br>
   </div>
