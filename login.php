@@ -1,6 +1,8 @@
 <?php 
 session_start();
 
+$login = False;
+
 
 	include("connection.php");
 	//include("functions.php");

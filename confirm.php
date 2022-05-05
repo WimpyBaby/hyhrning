@@ -9,7 +9,7 @@ $insurance = $_POST['insurance'];
 // $korttid = $_POST['insurance2'];
 $hyrtyp = $_POST['hyrtyp'];
 $kundId = $_SESSION['KundId'];
-print_r($_SESSION);
+print_r($_POST);
 
 if(isset($_SESSION['rent']) && $_SESSION['rent']==true){
     $insertSql = "INSERT INTO `hyr` (`KundId`, `Regnr`, `Utdatum`, `Indatum`, `Hyrtyp`) VALUES ($kundId, '$regnr', '$fromdate', '$todate', '$hyrtyp')";
@@ -43,7 +43,7 @@ if(isset($_SESSION['rent']) && $_SESSION['rent']==true){
                 <p>Insurance: <?php echo $insurance;?> kr</span></p>
                 <p>Short-Time: <?php echo $kundId;?> kr</span></p>
             </div>
-            <a href="history.php">See Your History</a>
+            <p><a href="history.php" class="button2">See Your History</a></p>
         </div> 
     </div>
 </body>

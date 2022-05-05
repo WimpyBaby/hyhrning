@@ -1,5 +1,10 @@
 <?php
 include "connection.php";
+session_start();
+if($_SESSION['isloggedin'] == false){
+    header("location: login.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

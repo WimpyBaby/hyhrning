@@ -26,7 +26,7 @@ include "../connection.php";
         <p><a href="kund.php">Customers</a></p>
         <p><a href="bilar.php">Cars</a></p>
         <p><a href="grupp.php">Price Group</a></p>
-        <p><a href="uthyrningar.php">Rentals</a></p>
+        <p><a href="rent.php">Rentals</a></p>
         <p><a href="index.php">Log Out</a></p>
     </div>
 </body>
