@@ -14,12 +14,14 @@
         $insertRes = mysqli_query($conn, $insertSql);
     }
     if(isset($_POST['update'])){
-        $oldUid = $_POST['oldUid'];
-        $uid = $_POST['uid'];
-        $name = $_POST['name'];
-        $pass = $_POST['password'];
-        $group = $_POST['group'];
-        $updateSql = "UPDATE `users` SET `uid`='$uid',`namn`='$name',`password`='$pass',`grupp`='$group' WHERE `uid`='$oldUid'";
+        $reg2 = $_POST['new_reg'];
+        $new_brand = $_POST['new_brand'];
+        $new_model = $_POST['new_model'];
+        $new_year = $_POST['new_year'];
+        $new_distance = $_POST['new_distance'];
+        $new_days = $_POST['new_days'];
+        $new_group = $_POST['new_group'];
+        $updateSql = "UPDATE `bil` SET `Marke`='$new_brand',`Modell`='$new_model',`Arsmodell`='$new_year',`Matarstallning`='$new_distance', `Antaldygn`='$new_days', `Gruppbet`='$new_group' WHERE `Regnr`='$reg2'";
         $updateRes = mysqli_query($conn, $updateSql);
     }
 ?>
@@ -72,20 +74,16 @@
                 <p>Rent Days</p>
                 <input type="text" name="rent">
             </div>
-            <p><select name="group">
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-                <option value="E">E</option>
-            </select></p>
+            <div class="box">
+            <p>Group:</p> 
+            <input type="text" name="group" maxlength="1" minlength = "1" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" onkeydown="return /[A-Z]/i.test(event.key)">
+            </div>
             <input type="submit" name="create" value="Create" class="button2">
         </form>
 </div>
 <div class="allusers">
         <h2 style="margin-top:3rem;" class="heading">All <span>Cars</span></h2>
 </div>
-        <!-- <div class="all_user"> -->
         <div class="mottFLEX">
             <?php 
             $admSql = "SELECT * FROM bil";
@@ -95,17 +93,14 @@
             ?>
             <div class="motUI">
             <form class="user" method="post" action="">
-                <input type="hidden" name="oldUid" value="<?php echo $row['Regnr']?>">
-                <p>Reg Number: <input type="text" name="name" value="<?php echo $row['Marke']?>"></p>
-                <p>Model: <input type="text" name="uid" value="<?php echo $row['Modell']?>"></p>
-                <p>Year: <input type="text" name="password" value="<?php echo $row['Arsmodell']?>"></p>
-                <p>Distance: <input type="text" name="password" value="<?php echo $row['Matarstallning']?>"></p>
-                <p>Rent Days: <input type="text" name="password" value="<?php echo $row['Antaldygn']?>"></p>
-                <select name="group">
-                    <option <?php echo ($row['Gruppbet'] === 'kundmottagare') ? 'selected' : null?> value="kundmottagare">kundmottagare</option>
-                    <option <?php echo ($row['Gruppbet'] === 'admin') ? 'selected' : null?> value="admin">admin</option>
-                    <option <?php echo ($row['Gruppbet'] === 'ekonom') ? 'selected' : null?> value="ekonom">Ekonom</option>
-                </select>
+                <input type="hidden" name="new_reg" value="<?php echo $row['Regnr']?>">
+                <p>Reg Number: <?php echo $row['Regnr'];?></p>
+                <p>Brand: <input type="text" name="new_brand" value="<?php echo $row['Marke']?>"></p>
+                <p>Model: <input type="text" name="new_model" value="<?php echo $row['Modell']?>"></p>
+                <p>Year: <input type="text" name="new_year" value="<?php echo $row['Arsmodell']?>"></p>
+                <p>Distance: <input type="text" name="new_distance" value="<?php echo $row['Matarstallning']?>"></p>
+                <p>Rent Days: <input type="text" name="new_days" value="<?php echo $row['Antaldygn']?>"></p>
+                <p>Group: <input type="text" name="new_group" value="<?php echo $row['Gruppbet'];?>" maxlength="1" minlength = "1" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" onkeydown="return /[A-Z]/i.test(event.key)">
                 <input type="submit" value="Update" class="button2" name="update">
             </form>
                 </div>

@@ -25,9 +25,9 @@ include "../connection.php";
         <p><h1>Database Rentals</h1></p>
         <p><a href="kund.php">Customers</a></p>
         <p><a href="bilar.php">Cars</a></p>
-        <p><a href="prisgrupp.php">Price Group</a></p>
+        <p><a href="grupp.php">Price Group</a></p>
         <p><a href="uthyrningar.php">Rentals</a></p>
-        <p><a href="adminlogin.php">Log Out</a></p>
+        <p><a href="index.php">Log Out</a></p>
     </div>
 </body>
 </html>
