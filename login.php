@@ -1,8 +1,7 @@
-<?php 
+<?php
 session_start();
-
-$login = False;
-
+session_destroy();
+session_start();
 
 	include("connection.php");
 	//include("functions.php");

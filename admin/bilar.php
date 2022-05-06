@@ -1,6 +1,17 @@
 <?php
-    session_start();
-    include "../connection.php";
+
+session_start();
+include "../connection.php";
+
+if($_SESSION['isloggedin'] == false){
+    header("location: ../login.php");
+}
+
+if($_SESSION['staffLogin'] == false){
+    header("location: index.php");
+}
+
+
     if(isset($_POST['create'])){
         $reg = $_POST['reg'];
         $brand = $_POST['brand'];

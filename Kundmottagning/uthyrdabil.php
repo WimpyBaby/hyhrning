@@ -1,7 +1,12 @@
-<?php
+<?php 
+
 
 include("../connection.php");
+
 session_start();
+
+print_r($_SESSION);
+
 $kundid = $_SESSION['KundId'];
 
 $sql = "SELECT * FROM hyr WHERE '$kundid' = KundId";

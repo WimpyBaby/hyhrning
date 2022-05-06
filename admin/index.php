@@ -1,4 +1,8 @@
 <?php
+session_start();
+session_destroy();
+session_start();
+
     $staffLogin = false;
     $showError = false;
     if($_SERVER['REQUEST_METHOD'] == 'POST'){

@@ -13,7 +13,7 @@
             session_start();
             $_SESSION['staffLogin'] = true;
             $_SESSION['uid'] = $uid;
-            header("location: index.php");
+            header("location: uthyrdabil.php");
         }
     }
 ?>
@@ -28,7 +28,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <form method="post" action="uthyrdabil.php">
+    <form method="post" action="">
         <h1 class="heading">Staff sign <span>In</span></h1>
         <input name="uid" type="text" placeholder="uid" class="box">
         <input name="password" type="password" placeholder="password" class="box">

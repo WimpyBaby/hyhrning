@@ -1,4 +1,14 @@
 <?php
+
+if($_SESSION['isloggedin'] == false){
+    header("location: ../login.php");
+}
+
+if($_SESSION['staffLogin'] == false){
+    header("location: index.php");
+}
+
+
     session_start();
     include "../connection.php";
     if(isset($_POST['create'])){
