@@ -2,6 +2,11 @@
 
 include("connection.php");
 session_start();
+
+if($_SESSION['isloggedin'] == false){
+    header("location: login.php");
+}
+
 $_SESSION['rent'] = true;
 $regnr = $_GET['regnr'];
 $fromdate = $_GET['in'];

@@ -1,10 +1,11 @@
 <?php
 include("connection.php");
-
-// if ($_SESSION['isLoggedin'] = false){
-//     header("location: start.php");
-// }
 session_start();
+
+if($_SESSION['isloggedin'] == false){
+    header("location: login.php");
+}
+
 $error = false;
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -36,6 +37,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <title>Hyrning</title>
 </head>
 <body>
+<a href="home.php">Return</a>
+
 <?php
             if($error){
 

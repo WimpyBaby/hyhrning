@@ -70,24 +70,22 @@ session_start();
 </head>
 <body>
 	<div class="container1">
-		<div class="box">
 			<form method="post" action="signup.php">
 				<h2>Sign Up</h2>
-				<input id="text" type="text" name="user_name" class="width" placeholder=" Username"><br><br>
-				<input id="text" type="text" name="adress" class="width" placeholder=" Adress"><br><br>
+				<input id="text" type="text" name="user_name" class="width" placeholder=" Username" required><br><br>
+				<input id="text" type="text" name="adress" class="width" placeholder=" Adress" required><br><br>
 				<input id="text" type="text" name="postadress" class="width" placeholder=" Postadress"><br><br>
-				<input id="text" type="text" name="tel" class="width" placeholder=" Telefon"><br><br>
-				<input id="text" type="text" name="mobiltel" class="width" placeholder=" MobilTel"><br><br>
-				<input id="text" type="text" name="epost" class="width" placeholder=" Epost"><br><br>
+				<input id="text" type="tel" name="tel" class="width" placeholder=" Telefon" required><br><br>
+				<input id="text" type="tel" name="mobiltel" class="width" placeholder=" MobilTel"><br><br>
+				<input id="text" type="email" name="epost" class="width" placeholder=" Epost" required><br><br>
 				<input id="text" type="password" name="password" class="width" placeholder=" Password"><br><br>
 				<input id="text" type="password" name="password" class="width" placeholder=" Repeat Password"><br><br>
 
 				<input id="button" type="submit" value="Signup" href="update.php"><br><br>
 
-				<a href="index.php">Click to Login</a><br><br>
-				<a href="index2.php">Click to Return</a><br><br>
+				<a href="login.php">Click to Login</a><br><br>
+				<a href="index.php">Click to Return</a><br><br>
 			</form>
-			</div>
 	</div>
 	</div>
 </body>

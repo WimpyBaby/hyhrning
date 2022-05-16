@@ -2,17 +2,21 @@
 
 session_start();
 
+// print_r($_SESSION);
+
 include "../connection.php";
 $utdatum = $_POST['utdatum'];
 $indatum = $_POST['indatum'];
 $fuel = $_POST['fuel'];
+$id = $_POST['kundid'];
+$matar = $_POST['matar'];
 
 $hyrtyp = $_POST['hyrtyp'];
 $dagar = ((strtotime($indatum)-strtotime($utdatum))/86400)+1;
 
 $reg = $_GET['regnr'];
 
-$sql = "SELECT * FROM kund WHERE ".$_SESSION['KundId']." = KundId";
+$sql = "SELECT * FROM kund WHERE '$id' = KundId";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
@@ -25,7 +29,7 @@ $result3 = mysqli_query($conn, $sql3);
 $row3 = mysqli_fetch_assoc($result3);
 
 
-$sql4 = "SELECT * FROM hyr WHERE `KundId` =".$_SESSION['KundId'];
+$sql4 = "SELECT * FROM hyr WHERE `KundId` = '$id'";
 $result4 = mysqli_query($conn, $sql4);
 $row4 = mysqli_fetch_assoc($result4);
 
@@ -36,7 +40,8 @@ $gruppSql = "SELECT *, Forsakring, Korttiddygn, Korttidkm, Veckoslut, Veckoslutk
 $gruppRes = mysqli_query($conn, $gruppSql);
 $gruppRow = mysqli_fetch_assoc($gruppRes);
 
-// echo $gruppRow['korttidkm'];
+$bilSql = "UPDATE bil SET `Matarstallning`= '$matar' WHERE `Regnr`= '$reg'";
+$bilres = mysqli_query($conn, $bilSql);
 
 switch ($hyrtyp){
     case 'korttid':
@@ -57,14 +62,10 @@ switch ($hyrtyp){
     break;  
 }
 
-$bok = $row4['Bokningsdatum'];
 $total = $kmCost + $kCost + $row3['Forsakring']*$dagar;
 
-$hyrSql = "UPDATE hyr SET `AntalKm`='$distance', `Kostnad`='$total', `Bensinkostnad`='$fuel' WHERE `KundId`= '".$_SESSION['KundId']."' AND `Regnr`='$reg' AND `Bokningsdatum`='$bok'";
+$hyrSql = "UPDATE hyr SET `AntalKm`='$distance', `Kostnad`='$total', `Bensinkostnad`='$fuel' WHERE `KundId`= '$id' AND `Regnr`='$reg' AND `Utdatum`='$utdatum' AND `Indatum` = '$indatum'";
 $hyrresult = mysqli_query($conn, $hyrSql);
-
-
-// echo $dagar;
 
 ?>
 
@@ -83,8 +84,9 @@ $hyrresult = mysqli_query($conn, $hyrSql);
 </head>
 <body>
     <h1>Payments</h1>
-    <a href="../home.php">Main Page</a>
-    <a href="userlogin.php">Main Page</a>
+    <a href="../home.php">Home Page</a>
+    <a href="index.php">Logout</a>
+    <a href="uthyrdabil.php">Return</a>
     <div class="container5">
     <form action="kvitto.php" method="post" target="_blank">
     <img src="../bilder/logo2.png">
@@ -93,8 +95,8 @@ $hyrresult = mysqli_query($conn, $hyrSql);
             <div class="info">
             <div class="info2">
                 <h2>Customer Info</h2>
-                <p><label>Kund Id: <?php echo $_SESSION['KundId'];?></label></p>
-                <input type="hidden" name="kundid" value="<?php echo $row['KundId'];?>">
+                <p><label>Kund Id: <?php echo $id ;?></label></p>
+                <input type="hidden" name="kundid" value="<?php echo $id;?>">
                 <p>Name: <?php echo $row['KundNamn'];?></p>
                 <input type="hidden" name="kundnamn" value="<?php echo $row['KundNamn'];?>">
                 <p>Adress: <?php echo $row['Adress'];?></p>

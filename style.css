@@ -694,3 +694,21 @@ margin: 1rem;
 .allusers h2{
     text-align: center;
 }
+
+.container7 h1{
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+    text-decoration: underline;
+}
+
+.chart{
+    width:40%;
+    margin: auto;
+    margin-top: 5rem;
+}
+
+h2{
+    text-align: center;
+    margin-top: 4rem;
+}

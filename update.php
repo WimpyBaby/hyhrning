@@ -4,6 +4,13 @@ include("connection.php");
 
 session_start();
 
+if($_SESSION['isloggedin'] == false){
+    header("location: login.php");
+}
+
+error_reporting(0);
+ini_set('display_errors', 0);
+
 if(isset($_SESSION['username'])) {
 $user_name = $_SESSION['username']; 
 $password = $_SESSION['password'];
@@ -12,7 +19,6 @@ $adress = $_SESSION['adress'];
 $postadress = $_SESSION['postadress']; 
 $tel = $_SESSION['tel'];
 $mobiltel = $_SESSION['mobiltel'];
-// $id = $_SESSION['KundId'];
 $new_username = "";
 $password = "";
 $new_adress ="";
@@ -48,7 +54,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
 else
     {
-        // print_r($_SESSION['id']);
         $hashedPass = $_SESSION['hash'];
         $sql = "select * from kund where KundId = ".$_SESSION['KundId'];
         $result = mysqli_query($conn, $sql);
@@ -86,6 +91,7 @@ else
     <title>Document</title>
 </head>
 <body>
+    <div class="box2">
     <center>
         <h1> Update Your Profile </h1>
 
@@ -99,11 +105,10 @@ else
             <input id="text" class="width" name="password" placeholder="Password" type="password"/></br>
        
             
-            <input type="submit" id="button" href="" value="update">
+            <input type="submit" id="button" href="" value="update"></br>
+            <a href="home.php">Return</a>
         </form>
     </center>
-    <div class="button1">
-        <a href="home.php">Return</a>
     </div>
 </body>
 </html>

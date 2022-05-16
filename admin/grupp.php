@@ -1,15 +1,11 @@
 <?php
 
-if($_SESSION['isloggedin'] == false){
-    header("location: ../login.php");
+session_start();
+
+if($_SESSION['staffLogin'] != true || ($_SESSION['staffLogin'] == true && $_SESSION['grupp'] == 'kundmottagare')){
+    header("location: ../Kundmottagning/index.php");
 }
 
-if($_SESSION['staffLogin'] == false){
-    header("location: index.php");
-}
-
-
-    session_start();
     include "../connection.php";
     if(isset($_POST['create'])){
         $group2 = $_POST['group2'];
@@ -49,6 +45,7 @@ if($_SESSION['staffLogin'] == false){
 <body>
     <a href="home.php">Return</a>
     <a href="index.php">Logout</a>
+    <a href="../ekonom/home.php">Ekonom Return</a>
     <div class="allusers">
         <h2 style="margin-top:3rem;" class="heading">New <span>Car</span></h2></br>
 </div>

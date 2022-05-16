@@ -1,8 +1,8 @@
 <?php
 
 $dbhost = "localhost";
-$dbuser = "uthyrning";
-$dbpass = "uthyrning";
+$dbuser = "root";
+$dbpass = "";
 $dbname = "uthyrning";
 $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 

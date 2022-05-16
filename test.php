@@ -1,6 +1,5 @@
 <?php
 session_start();
-// print_r($_SESSION);
 include("connection.php");
 $user_name = $_SESSION['username'];
 $password = $_SESSION['password'];

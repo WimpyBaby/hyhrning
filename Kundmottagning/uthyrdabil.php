@@ -5,19 +5,11 @@ include("../connection.php");
 
 session_start();
 
-print_r($_SESSION);
+// print_r($_SESSION);
 
-$kundid = $_SESSION['KundId'];
-
-$sql = "SELECT * FROM hyr WHERE '$kundid' = KundId";
+$sql = "SELECT * FROM hyr WHERE `AntalKm` is NULL ORDER BY `Indatum` ASC";
 $result = mysqli_query($conn, $sql);
-// while($row = mysqli_fetch_assoc($result)){
-//      echo "Your ID is: ", $row['KundNamn'];
-//      echo "</br>";
-//      $_SESSION['id'] = $row['KundId'];
-//      echo $_SESSION['id']; 
 
-// }
 ?>
 
 <!DOCTYPE html>
@@ -36,19 +28,29 @@ $result = mysqli_query($conn, $sql);
 </head>
 <body>
     <h1>Rented Cars</h1>
-    <a href="userlogin.php">Logout</a>
+    <a href="index.php">Logout</a>
     <a href="../home.php">Main Page</a>
+    <a href="../admin/home.php">Admin Return</a>
     <div class="mottFLEX">
-    <?php while($row = mysqli_fetch_assoc($result)){
-        $reg = $row['Regnr'];
+    <?php
+    while($row = mysqli_fetch_assoc($result)){
         $fromdate = $row['Utdatum'];
         $todate = $row['Indatum'];
+        $check = strtotime($fromdate) <= strtotime($todate);
+        $today = strtotime(date("Y/m/d"));
+        $total = ((strtotime($row['Indatum'])-strtotime($row['Utdatum']))/86400)+1;
+        $reg = $row['Regnr'];
+        $id = $row['KundId'];
+        $bok = $row['Bokningsdatum'];
         $matarslq = "SELECT * FROM bil WHERE '$reg' = Regnr";
         $matarRes = mysqli_query($conn, $matarslq);
         $row2 = mysqli_fetch_assoc($matarRes);
+        $idsql = "SELECT KundId FROM hyr WHERE Bokningsdatum = '$bok' AND Regnr = '$reg' AND Utdatum = '$fromdate'";
+        $idres = mysqli_query($conn, $idsql);
+        
         ?>
         <div class="motUI">
-            <p>Kund Id <?php echo $kundid;?></p> 
+            <p>Kund Id <?php echo $id;?></p>
             <p>Reg Number <?php echo $row['Regnr'];?></p>
             <p>Km reading <?php echo $row2['Matarstallning'];?></p>
             <form action="<?php echo 'betala.php?regnr='.$reg.'&in='.$fromdate.'&out='.$todate?>" method="post">
@@ -67,10 +69,12 @@ $result = mysqli_query($conn, $sql);
                 <input type="text" name="matar">
                 <label>Fuel Cost</label>
                 <input type="text" name="fuel">
+                <input type="hidden" name="kundid" value="<?php echo $id;?>"> 
                 <input type="submit" value="Calculate" class="button2"/><br><br>
             </form>
          </div>
-         <?php }?>
+         <?php }
+        //  }?>
     </div>
 </body>
 </html>

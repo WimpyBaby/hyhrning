@@ -1,16 +1,13 @@
 <?php
 
-if($_SESSION['isloggedin'] == false){
-    header("location: ../login.php");
+session_start();
+include "../connection.php";
+
+if($_SESSION['staffLogin'] != true || ($_SESSION['staffLogin'] == true && $_SESSION['grupp'] != 'Admin')){
+    header("location: ../Kundmottagning/index.php");
 }
 
-if($_SESSION['staffLogin'] == false){
-    header("location: index.php");
-}
 
-
-    session_start();
-    include "../connection.php";
     if(isset($_POST['create'])){
         $uid = $_POST['uid'];
         $name = $_POST['name'];

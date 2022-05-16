@@ -34,6 +34,7 @@ if($_SESSION['isloggedin'] == false){
         <div class="login">
             <a class="logga" href="update.php" class="login">My Account</a>
             <a class="logga" href="login.php" class="login">Logout</a>
+            <a class="logga" href="history.php" class="login">History</a>
         </div>
         <div class="phrase">
           <h1>Accelerating the Future</h1>

@@ -4,6 +4,10 @@ include("connection.php");
 session_start();
 // print_r($_SESSION);
 
+if($_SESSION['isloggedin'] == false){
+    header("location: login.php");
+}
+
 $kundid = $_SESSION['KundId'];
 
 ?>
@@ -25,6 +29,7 @@ $kundid = $_SESSION['KundId'];
 </head>
 <body>
 <h1>History</h1>
+<a href="home.php">Home</a>
 <div class="table1">
     <table>
         <thead>

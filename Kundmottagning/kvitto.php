@@ -1,14 +1,10 @@
 <?php
 
-if($_SESSION['isloggedin'] == false){
+session_start();
+
+if($_SESSION['staffLogin'] != true){
     header("location: ../login.php");
 }
-
-if($_SESSION['staffLogin'] == false){
-    header("location: index.php");
-}
-
-session_start();
 
 include "../connection.php";
 $utdatum = $_POST['utdatum'];
@@ -34,7 +30,7 @@ $total = $kmCost + $kcost + $forsakring*$dagar;
 // print_r($_POST);
 $reg = $_POST['reg'];
 
-$sql = "SELECT * FROM kund WHERE ".$_SESSION['KundId']." = KundId";
+$sql = "SELECT * FROM kund WHERE '$kundid' = KundId";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
@@ -45,12 +41,6 @@ $row2 = mysqli_fetch_assoc($result2);
 $sql3 = "SELECT * FROM gruppbet WHERE '".$row2['Gruppbet']."' = Gruppbet";
 $result3 = mysqli_query($conn, $sql3);
 $row3 = mysqli_fetch_assoc($result3);
-
-// $row3['korttidkm'];
-
-// $gruppSql = "SELECT *, Forsakring, Korttiddygn, Korttidkm, Veckoslut, Veckoslutkm, Veckoslutfri FROM bil INNER JOIN gruppbet ON bil.Gruppbet = gruppbet.Gruppbet WHERE bil.Regnr = '$reg'";
-// $gruppRes = mysqli_query($conn, $gruppSql);
-// $gruppRow = mysqli_fetch_assoc($gruppRes);
 
 ?>
 

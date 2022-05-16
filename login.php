@@ -15,7 +15,7 @@ session_start();
 		$password = $_POST['password'];
 		$hash = password_hash($password, PASSWORD_DEFAULT);
 		$epost = $_POST['epost'];
-		$sql = "SELECT * FROM kund WHERE KundId = '$id'";
+		$sql = "SELECT * FROM kund WHERE KundId = '$id' AND Password = '$hash' AND Epost = '$epost'";
 		$sqlresult = mysqli_query($conn, $sql);
 		if(!$sqlresult){
 			return;
@@ -74,7 +74,7 @@ session_start();
 	<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="style2.css?v=<?php echo time();?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -94,7 +94,7 @@ session_start();
 				<input id="button" type="submit" value="Login" class="button"><br><br>
 
 				<a href="signup.php">Not A Member</a><br><br>
-				<a href="index2.php">Click to Return</a><br><br>
+				<a href="index.php">Click to Return</a><br><br>
 			</form>
 		</div>
 	</div>

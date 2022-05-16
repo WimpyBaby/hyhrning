@@ -2,6 +2,11 @@
 
 include("connection.php");
 session_start();
+
+if($_SESSION['isloggedin'] == false){
+    header("location: login.php");
+}
+
 $regnr = $_GET['regnr'];
 $fromdate = $_GET['in'];
 $todate = $_GET['out'];
